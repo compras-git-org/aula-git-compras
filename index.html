@@ -20,6 +20,19 @@
           <input type="text" id="item-name" placeholder="Ex: Café, Arroz, Leite..." required>
         </div>
 
+        <div class="form-group">
+          <label for="item-category">Categoria</label>
+          <select id="item-category">
+            <option value="Alimentos">🥖 Alimentos</option>
+            <option value="Hortifrúti">🥦 Hortifrúti</option>
+            <option value="Carnes & Frios">🥩 Carnes & Frios</option>
+            <option value="Bebidas">🧃 Bebidas</option>
+            <option value="Limpeza">🧹 Limpeza</option>
+            <option value="Higiene">🧴 Higiene</option>
+            <option value="Outros" selected>📦 Outros</option>
+          </select>
+        </div>
+
         <div class="form-row">
           <div class="form-group">
             <label for="item-qty">Quantidade</label>
@@ -40,6 +53,20 @@
       <div class="list-header">
         <h2>Itens na Lista</h2>
         <button id="btn-clear" class="btn btn-danger-outline" title="Limpar todos os itens">Limpar Tudo</button>
+      </div>
+
+      <div class="filter-container">
+        <label class="filter-label">Filtrar por Categoria:</label>
+        <div class="filter-chips" id="filter-chips">
+          <button type="button" class="chip active" data-category="Todos">Todos</button>
+          <button type="button" class="chip" data-category="Alimentos">🥖 Alimentos</button>
+          <button type="button" class="chip" data-category="Hortifrúti">🥦 Hortifrúti</button>
+          <button type="button" class="chip" data-category="Carnes & Frios">🥩 Carnes</button>
+          <button type="button" class="chip" data-category="Bebidas">🧃 Bebidas</button>
+          <button type="button" class="chip" data-category="Limpeza">🧹 Limpeza</button>
+          <button type="button" class="chip" data-category="Higiene">🧴 Higiene</button>
+          <button type="button" class="chip" data-category="Outros">📦 Outros</button>
+        </div>
       </div>
 
       <ul id="shopping-list" class="shopping-list">

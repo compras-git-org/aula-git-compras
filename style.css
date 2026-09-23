@@ -65,11 +65,19 @@ header p {
   gap: 6px;
   margin-bottom: 14px;
   flex: 1;
+  min-width: 0;
 }
 
 .form-row {
   display: flex;
   gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
 }
 
 label {
@@ -78,16 +86,23 @@ label {
   color: var(--text-main);
 }
 
-input {
+input, select {
+  width: 100%;
   padding: 10px 14px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 0.95rem;
   outline: none;
+  background-color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-input:focus {
+input::placeholder {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+input:focus, select:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
@@ -136,6 +151,57 @@ input:focus {
   font-size: 1.2rem;
 }
 
+.filter-container {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.filter-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.filter-chips::-webkit-scrollbar {
+  height: 4px;
+}
+
+.filter-chips::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.chip {
+  background: #f1f5f9;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-main);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.chip:hover {
+  background: #e2e8f0;
+}
+
+.chip.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
 .shopping-list {
   list-style: none;
   display: flex;
@@ -182,9 +248,24 @@ input:focus {
   flex-direction: column;
 }
 
+.item-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .item-title {
   font-weight: 600;
   font-size: 0.95rem;
+}
+
+.category-badge {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background-color: #e0e7ff;
+  color: #3730a3;
 }
 
 .item-meta {

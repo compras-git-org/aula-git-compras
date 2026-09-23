@@ -1,9 +1,11 @@
 // Estado da aplicação
 let items = JSON.parse(localStorage.getItem('shopping_items')) || [];
+let selectedCategoryFilter = 'Todos';
 
 // Elementos do DOM
 const itemForm = document.getElementById('item-form');
 const itemNameInput = document.getElementById('item-name');
+const itemCategoryInput = document.getElementById('item-category');
 const itemQtyInput = document.getElementById('item-qty');
 const itemPriceInput = document.getElementById('item-price');
 const shoppingList = document.getElementById('shopping-list');
@@ -11,6 +13,7 @@ const emptyState = document.getElementById('empty-state');
 const totalItemsEl = document.getElementById('total-items');
 const totalValueEl = document.getElementById('total-value');
 const btnClear = document.getElementById('btn-clear');
+const filterChipsContainer = document.getElementById('filter-chips');
 
 // Formata valores para o padrão de moeda brasileiro (BRL)
 function formatCurrency(value) {
@@ -29,19 +32,24 @@ function saveItems() {
 function render() {
   shoppingList.innerHTML = '';
 
+  // Filtra itens pela categoria selecionada
+  const filteredItems = selectedCategoryFilter === 'Todos'
+    ? items
+    : items.filter((item) => (item.category || 'Outros') === selectedCategoryFilter);
+
   if (items.length === 0) {
     emptyState.style.display = 'block';
+    emptyState.textContent = 'Sua lista está vazia. Adicione itens acima!';
+  } else if (filteredItems.length === 0) {
+    emptyState.style.display = 'block';
+    emptyState.textContent = `Nenhum item encontrado na categoria "${selectedCategoryFilter}".`;
   } else {
     emptyState.style.display = 'none';
   }
 
-  let totalQty = 0;
-  let totalPrice = 0;
-
-  items.forEach((item) => {
+  // Renderiza itens filtrados
+  filteredItems.forEach((item) => {
     const itemTotal = item.qty * item.price;
-    totalQty += item.qty;
-    totalPrice += itemTotal;
 
     const li = document.createElement('li');
     li.className = `shopping-item ${item.purchased ? 'purchased' : ''}`;
@@ -55,7 +63,10 @@ function render() {
           aria-label="Marcar como comprado"
         />
         <div class="item-info">
-          <span class="item-title">${escapeHtml(item.name)}</span>
+          <div class="item-title-row">
+            <span class="item-title">${escapeHtml(item.name)}</span>
+            <span class="category-badge">${escapeHtml(item.category || 'Outros')}</span>
+          </div>
           <span class="item-meta">Qtd: ${item.qty} ${item.price > 0 ? `× ${formatCurrency(item.price)}` : ''}</span>
         </div>
       </div>
@@ -84,9 +95,27 @@ function render() {
     shoppingList.appendChild(li);
   });
 
-  // Atualiza rodapé
-  totalItemsEl.textContent = totalQty;
-  totalValueEl.textContent = formatCurrency(totalPrice);
+  // Cálculo dos totais
+  let totalQty = 0;
+  let totalPrice = 0;
+  items.forEach((item) => {
+    totalQty += item.qty;
+    totalPrice += item.qty * item.price;
+  });
+
+  if (selectedCategoryFilter !== 'Todos') {
+    let filteredQty = 0;
+    let filteredPrice = 0;
+    filteredItems.forEach((item) => {
+      filteredQty += item.qty;
+      filteredPrice += item.qty * item.price;
+    });
+    totalItemsEl.textContent = `${filteredQty} (${totalQty} no total)`;
+    totalValueEl.textContent = `${formatCurrency(filteredPrice)} (${formatCurrency(totalPrice)} no total)`;
+  } else {
+    totalItemsEl.textContent = totalQty;
+    totalValueEl.textContent = formatCurrency(totalPrice);
+  }
 }
 
 // Evita injeção básica de caracteres
@@ -101,6 +130,7 @@ itemForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const name = itemNameInput.value.trim();
+  const category = itemCategoryInput.value || 'Outros';
   const qty = parseInt(itemQtyInput.value, 10) || 1;
   const price = parseFloat(itemPriceInput.value) || 0;
 
@@ -109,6 +139,7 @@ itemForm.addEventListener('submit', (e) => {
   const newItem = {
     id: Date.now().toString(),
     name,
+    category,
     qty,
     price,
     purchased: false
@@ -121,7 +152,20 @@ itemForm.addEventListener('submit', (e) => {
   // Resetar formulário
   itemForm.reset();
   itemQtyInput.value = '1';
+  itemCategoryInput.value = category; // Mantém a última categoria usada
   itemNameInput.focus();
+});
+
+// Manipulador dos filtros por categoria
+filterChipsContainer.addEventListener('click', (e) => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+
+  document.querySelectorAll('.filter-chips .chip').forEach((c) => c.classList.remove('active'));
+  chip.classList.add('active');
+
+  selectedCategoryFilter = chip.dataset.category;
+  render();
 });
 
 // Limpar todos os itens

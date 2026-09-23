@@ -4,11 +4,13 @@ Aplicação simples e interativa de lista de compras desenvolvida para praticar 
 
 ## 🚀 Funcionalidades
 
-- ➕ Adicionar itens informando nome, quantidade e preço unitário.
-- ✅ Marcar itens como comprados/concluídos.
-- 🗑️ Remover itens individualmente ou limpar toda a lista.
-- 💰 Cálculo automático do total de itens e do valor estimado total.
-- 💾 Persistência automática no navegador via `localStorage`.
+- ➕ **Adicionar itens:** informe produto, categoria, quantidade e preço unitário.
+- 🏷️ **Categorias:** organização por Alimentos, Hortifrúti, Carnes & Frios, Bebidas, Limpeza, Higiene e Outros.
+- 🔍 **Filtro dinâmico:** filtre rapidamente os itens por categoria com recálculo automático dos totais filtrados.
+- ✅ **Marcar como comprado:** controle visual dos itens já adquiridos.
+- 🗑️ **Remoção de itens:** exclua itens individualmente ou limpe a lista completa.
+- 💰 **Totais e Orçamento:** visualização da quantidade e valor total da lista (e valor por categoria ao filtrar).
+- 💾 **Persistência local:** dados salvos no navegador via `localStorage`.
 
 ## 💻 Como Executar
 
@@ -19,6 +21,6 @@ Não requer instalação de dependências ou servidores complexos:
 
 ## 📂 Estrutura de Arquivos
 
-- [index.html](file:///C:/Users/andrei.bsilva/Desktop/aula-git-compras/index.html): Estrutura HTML da interface.
-- [style.css](file:///C:/Users/andrei.bsilva/Desktop/aula-git-compras/style.css): Estilos visuais e layout responsivo.
-- [app.js](file:///C:/Users/andrei.bsilva/Desktop/aula-git-compras/app.js): Lógica de manipulação do DOM, cálculos e persistência.
+- [index.html](file:///C:/Users/andrei.bsilva/Desktop/aula-git-compras/index.html): Estrutura HTML da interface com formulário e chips de filtro.
+- [style.css](file:///C:/Users/andrei.bsilva/Desktop/aula-git-compras/style.css): Estilos visuais, badges de categoria e layout responsivo.
+- [app.js](file:///C:/Users/andrei.bsilva/Desktop/aula-git-compras/app.js): Lógica de manipulação do DOM, filtros, cálculos e persistência.
