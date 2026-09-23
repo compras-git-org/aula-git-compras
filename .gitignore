@@ -1,0 +1,27 @@
+# ---------- Project ----------
+HELP.md
+.gitattributes
+
+# ---------- Build / Maven ----------
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# Maven local metadata (optional to ignore)
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# ---------- IntelliJ IDEA ----------
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
