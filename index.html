@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Compras</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🛒 Minha Lista de Compras</h1>
+      <p>Gerencie seus itens de compras de forma simples e rápida.</p>
+    </header>
+
+    <section class="card form-section">
+      <form id="item-form">
+        <div class="form-group">
+          <label for="item-name">Produto</label>
+          <input type="text" id="item-name" placeholder="Ex: Café, Arroz, Leite..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="item-category">Categoria</label>
+          <select id="item-category">
+            <option value="Alimentos">🥖 Alimentos</option>
+            <option value="Hortifrúti">🥦 Hortifrúti</option>
+            <option value="Carnes & Frios">🥩 Carnes & Frios</option>
+            <option value="Bebidas">🧃 Bebidas</option>
+            <option value="Limpeza">🧹 Limpeza</option>
+            <option value="Higiene">🧴 Higiene</option>
+            <option value="Outros" selected>📦 Outros</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="item-qty">Quantidade</label>
+            <input type="number" id="item-qty" min="1" value="1" required>
+          </div>
+
+          <div class="form-group">
+            <label for="item-price">Preço Unitário (R$)</label>
+            <input type="number" id="item-price" step="0.01" min="0" placeholder="0,00">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="btn-add">Adicionar Item</button>
+      </form>
+    </section>
+
+    <section class="card list-section">
+      <div class="list-header">
+        <h2>Itens na Lista</h2>
+        <button id="btn-clear" class="btn btn-danger-outline" title="Limpar todos os itens">Limpar Tudo</button>
+      </div>
+
+      <div class="filter-container">
+        <label class="filter-label">Filtrar por Categoria:</label>
+        <div class="filter-chips" id="filter-chips">
+          <button type="button" class="chip active" data-category="Todos">Todos</button>
+          <button type="button" class="chip" data-category="Alimentos">🥖 Alimentos</button>
+          <button type="button" class="chip" data-category="Hortifrúti">🥦 Hortifrúti</button>
+          <button type="button" class="chip" data-category="Carnes & Frios">🥩 Carnes</button>
+          <button type="button" class="chip" data-category="Bebidas">🧃 Bebidas</button>
+          <button type="button" class="chip" data-category="Limpeza">🧹 Limpeza</button>
+          <button type="button" class="chip" data-category="Higiene">🧴 Higiene</button>
+          <button type="button" class="chip" data-category="Outros">📦 Outros</button>
+        </div>
+      </div>
+
+      <ul id="shopping-list" class="shopping-list">
+        <!-- Itens inseridos dinamicamente pelo JavaScript -->
+      </ul>
+
+      <div id="empty-state" class="empty-state">
+        <p>Sua lista está vazia. Adicione itens acima!</p>
+      </div>
+
+      <div class="summary-footer">
+        <div class="summary-item">
+          <span>Total de itens:</span>
+          <strong id="total-items">0</strong>
+        </div>
+        <div class="summary-item">
+          <span>Valor estimado total:</span>
+          <strong id="total-value">R$ 0,00</strong>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
