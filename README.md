@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🛒 Aula Git - Lista de Compras
 
 Aplicação simples e interativa de lista de compras desenvolvida para praticar controle de versão com Git e GitHub.
@@ -24,3 +25,6 @@ Não requer instalação de dependências ou servidores complexos:
 - [index.html](file:///C:/Users/andrei.bsilva/Desktop/aula-git-compras/index.html): Estrutura HTML da interface com formulário e chips de filtro.
 - [style.css](file:///C:/Users/andrei.bsilva/Desktop/aula-git-compras/style.css): Estilos visuais, badges de categoria e layout responsivo.
 - [app.js](file:///C:/Users/andrei.bsilva/Desktop/aula-git-compras/app.js): Lógica de manipulação do DOM, filtros, cálculos e persistência.
+=======
+# aula-git-compras.
+>>>>>>> fc9955c2ad59d8713832b18bc8e79ce35e30bf93
